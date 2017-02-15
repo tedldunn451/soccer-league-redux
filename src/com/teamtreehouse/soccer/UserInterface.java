@@ -56,6 +56,16 @@ public class UserInterface {
             try {
                 selection = mainPrompt();
 
+                switch(selection) {
+                    case "1":
+                        // create a new team
+                        displayTeamList();
+                        createTeamPrompt();
+                        pauseProgram();
+                        break;
+                }
+
+
 
             } catch (IOException ioe){
 
@@ -63,4 +73,40 @@ public class UserInterface {
             }
         } while (!selection.equals("7"));
     }
+
+    public void pauseProgram() throws IOException {
+
+        System.out.print("Press the <Enter> key to continue...");
+        reader.readLine();
+    }
+
+    public void displayTeamList() {
+
+        System.out.printf("%n%-20s %-20s %-8s%n%n", "Team Name", "Coach Name", "Players");
+        if (!league.isEmpty()) {
+            int count = 1;
+            for (Team team : league) {
+                System.out.printf("%d) %s%n", count, String.valueOf(team));
+                count++;
+            }
+        } else {
+            System.out.println("No teams currently in the league");
+        }
+    }
+    
+    public void createTeamPrompt() throws IOException {
+
+        System.out.print("\nEnter the new team name: ");
+        String newTeamName = reader.readLine();
+
+        System.out.print("Enter the new team coach's name: ");
+        String coachName = reader.readLine();
+
+        Team newTeam = new Team(newTeamName, coachName);
+        league.add(newTeam);
+
+        System.out.printf("%nTeam: %s coached by %s successfully created and added to the league%n%n",
+                newTeam.getTeamName(), newTeam.getCoachName());
+    }
+
 }
