@@ -39,7 +39,7 @@ public class Team implements Comparable {
         if ( this.getNumberOfPlayers() < Team.MAX_PLAYERS ) {
             this.teamRoster.add(player);
             this.numberOfPlayers++;
-            System.out.printf("%n%s %s successfully added to Team: %s%n",
+            System.out.printf("%n%s %s successfully added to Team: %s%n%n",
                                 player.getFirstName(), player.getLastName(), this.teamName);
 
         } else {
@@ -53,7 +53,7 @@ public class Team implements Comparable {
         if ( this.getNumberOfPlayers() > 0 ) {
             this.teamRoster.remove(player);
             this.numberOfPlayers--;
-            System.out.printf("%n%s %s successfully removed from Team: %s%n",
+            System.out.printf("%n%s %s successfully removed from Team: %s%n%n",
                                 player.getFirstName(), player.getLastName(), this.teamName);
         } else {
             System.out.print("Error. Cannot remove player. There are no players currently assigned to this team.");
