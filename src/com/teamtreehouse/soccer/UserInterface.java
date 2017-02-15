@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,7 +65,7 @@ public class UserInterface {
 
                     case "2":
                         // add a player to a team
-                        displayAvailablePlayerList(availablePlayers);
+                        displayPlayerList(availablePlayers);
                         Player playerToAdd = getAvailablePlayerPrompt();
                         displayTeamList();
                         Team addingTeam = getTeamPrompt();
@@ -72,6 +73,15 @@ public class UserInterface {
                         availablePlayers.remove(playerToAdd);
                         pauseProgram();
                         break;
+
+                    case "6":
+                        // view a team roster
+                        displayTeamList();
+                        Team teamToDisplay = getTeamPrompt();
+                        displayPlayerList(teamToDisplay.getTeamRoster());
+                        pauseProgram();
+                        break;
+
 
                 }
 
@@ -128,7 +138,7 @@ public class UserInterface {
     }
 
 
-    public void displayAvailablePlayerList(List<Player> players) {
+    public void displayPlayerList(Collection<Player> players) {
 
         System.out.printf("%n%-24s %-10s %-6s%n%n", "Player Name", "Height", "Experience");
         int count = 1;
