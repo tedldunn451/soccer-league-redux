@@ -12,6 +12,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+import static java.util.Comparator.naturalOrder;
+
 public class UserInterface {
 
     private Set<Team> league;
@@ -73,6 +75,20 @@ public class UserInterface {
                         availablePlayers.remove(playerToAdd);
                         pauseProgram();
                         break;
+
+                    case "3":
+                        // remove a player from a team
+                        displayTeamList();
+                        Team removingTeam = getTeamPrompt();
+                        Set<Player> roster = removingTeam.getTeamRoster();
+                        displayPlayerList(roster);
+                        Player playerToRemove = getTeamPlayerPrompt(roster);
+                        availablePlayers.add(playerToRemove);
+                        availablePlayers.sort(naturalOrder());
+                        removingTeam.removePlayerFromTeam(playerToRemove);
+                        pauseProgram();
+                        break;
+
 
                     case "6":
                         // view a team roster
@@ -136,6 +152,15 @@ public class UserInterface {
         Team[] teamArray = league.toArray(new Team[0]);
         return teamArray[teamNumber - 1];
     }
+
+    public Player getTeamPlayerPrompt(Set<Player> roster) throws IOException {
+
+        System.out.print("\nEnter the number for the player you would like to select: ");
+        int playerNumber = Integer.parseInt(reader.readLine());
+        Player[] teamPlayerArray = roster.toArray(new Player[0]);
+        return teamPlayerArray[playerNumber - 1];
+    }
+
 
 
     public void displayPlayerList(Collection<Player> players) {
