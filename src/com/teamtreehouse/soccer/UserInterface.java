@@ -33,7 +33,7 @@ public class UserInterface {
         mainMenu.put("2", "Add a player to a team");
         mainMenu.put("3", "Remove a player from a team");
         mainMenu.put("4", "View a report of players grouped by height");
-        mainMenu.put("5", "View a report of players grouped by experience level");
+        mainMenu.put("5", "View a report of teams grouped by experience level");
         mainMenu.put("6", "View a team roster");
         mainMenu.put("7", "Exit the program");
     }
@@ -89,6 +89,13 @@ public class UserInterface {
                         pauseProgram();
                         break;
 
+                    case "4":
+                        // display height report
+                        displayTeamList();
+                        Team teamToReport = getTeamPrompt();
+                        displayHeightReport(teamToReport.getTeamRoster());
+                        pauseProgram();
+                        break;
 
                     case "6":
                         // view a team roster
@@ -98,13 +105,14 @@ public class UserInterface {
                         pauseProgram();
                         break;
 
-
+                    case "7":
+                        // exit the program
+                        break;
+                    default:
+                        System.out.println("Unknown entry. Please try again.");
+                        break;
                 }
-
-
-
             } catch (IOException ioe){
-
                 System.out.println("Invalid entry. Please enter a number between 1 and 7");
             }
         } while (!selection.equals("7"));
@@ -112,7 +120,7 @@ public class UserInterface {
 
     public void pauseProgram() throws IOException {
 
-        System.out.print("Press the <Enter> key to continue...");
+        System.out.print("\nPress the <Enter> key to continue...");
         reader.readLine();
     }
 
@@ -161,8 +169,6 @@ public class UserInterface {
         return teamPlayerArray[playerNumber - 1];
     }
 
-
-
     public void displayPlayerList(Collection<Player> players) {
 
         System.out.printf("%n%-24s %-10s %-6s%n%n", "Player Name", "Height", "Experience");
@@ -178,6 +184,51 @@ public class UserInterface {
         System.out.print("\nEnter the number for the player you would like to select: ");
         int playerNumber = Integer.parseInt(reader.readLine());
         return availablePlayers.get(playerNumber - 1);
+    }
+
+    private void displayHeightReport(TreeSet<Player> team) {
+
+        List<Player> smallPlayers = new ArrayList<>();
+        List<Player> mediumPlayers = new ArrayList<>();
+        List<Player> tallPlayers = new ArrayList<>();
+        String emptyList = "No players in this height range on this team.";
+
+        for(Player player : team) {
+            if(player.getHeightInInches() <= 40) {
+                smallPlayers.add(player);
+            } else if(player.getHeightInInches() <= 46) {
+                mediumPlayers.add(player);
+            } else {
+                tallPlayers.add(player);
+            }
+        }
+
+        System.out.println("\nPlayers 35-40 inches in height\n");
+        if(smallPlayers.size() == 0) {
+            System.out.println(emptyList);
+        } else {
+            for(int i = 0; i < smallPlayers.size(); i++) {
+                System.out.println(smallPlayers.get(i));
+            }
+        }
+
+        System.out.println("\nPlayers 41-46 inches in height\n");
+        if(mediumPlayers.size() == 0) {
+            System.out.println(emptyList);
+        } else {
+            for(int i = 0; i < mediumPlayers.size(); i++) {
+                System.out.println(mediumPlayers.get(i));
+            }
+        }
+
+        System.out.println("\nPlayers 47-50 inches in height\n");
+        if(tallPlayers.size() == 0) {
+            System.out.println(emptyList);
+        } else {
+            for(int i = 0; i < tallPlayers.size(); i++) {
+                System.out.println(tallPlayers.get(i));
+            }
+        }
     }
 
 }
