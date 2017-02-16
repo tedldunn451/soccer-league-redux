@@ -97,6 +97,10 @@ public class UserInterface {
                         pauseProgram();
                         break;
 
+                    case "5":
+
+                        break;
+
                     case "6":
                         // view a team roster
                         displayTeamList();
@@ -149,7 +153,7 @@ public class UserInterface {
         Team newTeam = new Team(newTeamName, coachName);
         league.add(newTeam);
 
-        System.out.printf("%nTeam: %s coached by %s successfully created and added to the league%n%n",
+        System.out.printf("%nTeam: %s coached by %s successfully created and added to the league%n",
                 newTeam.getTeamName(), newTeam.getCoachName());
     }
 
@@ -205,28 +209,28 @@ public class UserInterface {
 
         System.out.println("\nPlayers 35-40 inches in height\n");
         if(smallPlayers.size() == 0) {
-            System.out.println(emptyList);
+            System.out.println("\t" + emptyList);
         } else {
             for(int i = 0; i < smallPlayers.size(); i++) {
-                System.out.println(smallPlayers.get(i));
+                System.out.println("\t" + smallPlayers.get(i));
             }
         }
 
         System.out.println("\nPlayers 41-46 inches in height\n");
         if(mediumPlayers.size() == 0) {
-            System.out.println(emptyList);
+            System.out.println("\t" + emptyList);
         } else {
             for(int i = 0; i < mediumPlayers.size(); i++) {
-                System.out.println(mediumPlayers.get(i));
+                System.out.println("\t" + mediumPlayers.get(i));
             }
         }
 
         System.out.println("\nPlayers 47-50 inches in height\n");
         if(tallPlayers.size() == 0) {
-            System.out.println(emptyList);
+            System.out.println("\t" + emptyList);
         } else {
             for(int i = 0; i < tallPlayers.size(); i++) {
-                System.out.println(tallPlayers.get(i));
+                System.out.println("\t" + tallPlayers.get(i));
             }
         }
     }
